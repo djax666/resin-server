@@ -34,7 +34,7 @@ const server = uid => ({
 
 const RESIN_INTERVAL = 8*60 // 8 minutes
 
-fastify.get('/resin', async (req, rep) => {
+fastify.get('/', async (req, rep) => {
   const res = await fetch(`https://bbs-api-os.hoyolab.com/game_record/genshin/api/dailyNote?role_id=${uid}&server=${server(uid)}`, { headers: headers() }).then(res => res.json());
   const notes = res.data;
 
@@ -58,4 +58,18 @@ fastify.get('/resin', async (req, rep) => {
   });
 });
 
-fastify.listen(PORT);
+fastify.listen(PORT, '0.0.0.0');
+
+setInterval(async () => {
+  const stats = await fetch('https://sg-hk4e-api.hoyolab.com/event/sol/info?lang=en-us&act_id=e202102251931481', { headers: headers() }).then(res => res.json());
+  if (stats.data.is_sign) return;
+  
+  await fetch('https://sg-hk4e-api.hoyolab.com/event/sol/sign?lang=en-us', {
+    method: 'POST',
+    body: JSON.stringify({ act_id: 'e202102251931481' }),
+    headers: {
+      ...headers(),
+      'Content-Type': 'application/json',
+    }
+  });
+}, /* every 24 hours */ 3_600_000 * 24);
