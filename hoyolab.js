@@ -38,8 +38,8 @@ const headers = (root = 'sea') => {
     'x-rpc-client_type': '5',
     'x-rpc-language': 'en-us',
     'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64; rv:100.0) Gecko/20100101 Firefox/100.0',
-    cookie: env.cookies,
-    ds: DS(),
+    Cookie: env.cookies,
+    DS: DS(),
   };
 };
 
