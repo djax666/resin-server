@@ -63,7 +63,7 @@ async function notes() {
   nextResin = parseInt(notes.resin_recovery_time) % RESIN_INTERVAL;
 
   return {
-    again_after: nextResin ? nextResin + 5 : RESIN_INTERVAL,
+    again_after: notes.current_resin < notes.max_resin ? nextResin + 5 : RESIN_INTERVAL,
     
     resin: notes.current_resin,
     resin_max: notes.max_resin,
