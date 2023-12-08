@@ -1,12 +1,19 @@
 const fastify = require('fastify')();
-const env = require('./.env.json');
+//const env = require('./.env.json');
+const env = {"port":3000,  "cookies": "", "uid": 70000, "name": "undefined" , "check_in": false } ;
+env.port = process.argv[2];
+env.name = process.argv[3];
+env.uid = process.argv[4];
+env.cookies = process.argv[5];
+env.check_in = process.argv[6];
+
 const { notes, checkIn } = require('./hoyolab');
 
 fastify.get('/', async (req, rep) => {
   return rep.send(await notes());
 });
 
-fastify.listen(env.PORT, '0.0.0.0', () => console.log('ready!'));
+fastify.listen(env.port, '0.0.0.0', () => console.log(env.name+' ready!'));
 
 if (env.check_in) {
   setInterval(() => {
