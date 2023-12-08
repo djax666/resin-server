@@ -159,4 +159,6 @@ The result is:
 
 ![Widget Result](genshin_logo/widget_result.jpg)
 
+I had to use HTML special character entities, because html image tag is not supported.
+
 [bc]: https://act.hoyolab.com/app/community-game-records-sea/index.html#/ys
