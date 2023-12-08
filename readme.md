@@ -120,4 +120,43 @@ The result:
 
 ![Markdown Card](genshin_logo/MarkdownCard.png "the Markdown Card")
 
+
+### Home Assistant Android Widget
+
+You can add a Html Widget:
+
+![Widget Add](genshin_logo/widget_add.jpg)
+
+Copy the following code and paste it in settings:
+
+![Widget Setting](genshin_logo/widget_setting.jpg)
+
+The code:
+
+```
+{% set x = 'gi_accountname1' %}
+ <big><big><big>{{ states.sensor[x].attributes.name }}</big></big></big>  <small>&nbsp; (Refresh at {{ states.sensor[x].attributes.timestamp }}) </small>
+<div style="text-align: end">
+<br> &#x1F319; Résines: <big><big><b>{{ states.sensor[x].attributes.resin }}</b></big></big> / <b>{{ states.sensor[x].attributes.resin_max }}</b> (prochaine: {{ states.sensor[x].attributes.again_after }}s)
+<br>&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp; Plein dans  {{ states.sensor[x].attributes.resin_recovery_time_h }}
+<br>&#x1FA99; Pièces: <big><b>{{ states.sensor[x].attributes.coins }}</b></big> / <b>{{ states.sensor[x].attributes.coins_max}}</b> {%if states.sensor[x].attributes.coins_refill_hours == 0 %}(Plein) {% else %}(Plein dans {{ states.sensor[x].attributes.coins_refill_hours }} h) {% endif %} 
+ <br> &#127919; Quêtes quotidiennes: <b>{{ states.sensor[x].attributes.commissions}}</b> faite{% if states.sensor[x].attributes.commissions > 1 %}s{%endif%} / <b>{{ states.sensor[x].attributes.commissions_max}}</b> 
+<br>  &#x1F479; Boss hebdo: <b>{{ states.sensor[x].attributes.bosses }}</b> restant{% if states.sensor[x].attributes.bosses > 1 %}s{%endif%} / <b>{{ states.sensor[x].attributes.bosses_max }}</b>
+
+<br> 	&#128736;  {% if ( states.sensor[x].attributes.parametric_transformer_reached) -%}
+ Transformateur activable.
+{%- else -%}
+ Transformateur dispo. dans {{ states.sensor[x].attributes.parametric_transformer_recovery_time }}.
+{%- endif %}
+<br>&#128205;  {% if ( (states.sensor[x].attributes.are_expeditions_finished) ) -%}
+ Expédition(s) terminée(s).
+{%- else -%}
+ Expéditions finies dans {{ states.sensor[x].attributes.until_expeditions_done_h}} 
+{%- endif -%}
+</div>
+```
+The result is:
+
+![Widget Result](genshin_logo/widget_result.jpg)
+
 [bc]: https://act.hoyolab.com/app/community-game-records-sea/index.html#/ys
