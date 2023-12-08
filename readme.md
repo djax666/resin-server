@@ -118,6 +118,6 @@ Then you can use it in a Markdown Card :
 
 The result:
 
-![Markdown Card](MarkdownCard.png "the Markdown Card")
+![Markdown Card](genshin_logo/MarkdownCard.png "the Markdown Card")
 
 [bc]: https://act.hoyolab.com/app/community-game-records-sea/index.html#/ys
